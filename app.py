@@ -7,6 +7,25 @@ from io import BytesIO
 
 import pandas as pd
 import streamlit as st
+with st.expander("DEBUG KEY"):
+    key_env = os.getenv("OPENAI_API_KEY")
+    key_secret = None
+    try:
+        if "OPENAI_API_KEY" in st.secrets:
+            key_secret = st.secrets["OPENAI_API_KEY"]
+    except Exception:
+        pass
+
+    st.write("ENV exists:", key_env is not None)
+    st.write("SECRETS exists:", key_secret is not None)
+
+    if key_env:
+        st.write("ENV prefix:", key_env[:12])
+        st.write("ENV suffix:", key_env[-6:])
+
+    if key_secret:
+        st.write("SECRETS prefix:", key_secret[:12])
+        st.write("SECRETS suffix:", key_secret[-6:])
 from PIL import Image
 
 try:
